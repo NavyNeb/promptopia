@@ -14,13 +14,16 @@ const Nav = () => {
     const setProviders = async () => {
       const response = await getProviders();
 
+      console.log('response', response)
+
       setProvider(response);
     };
 
     setProviders();
   }, []);
 
-  alert(session)
+console.log('session', session)
+  // alert(session)
 
   return (
     <nav className="flex-between w-full mb-16 pt-3">
@@ -40,10 +43,10 @@ const Nav = () => {
         { session?.user  ? (
           <div className="flex gap-3 md:gap-5">
             <Link href={"/create-prompt"} className="black_btn">
-              Create Post
+              Create Prompt
             </Link>
 
-            <button type="button" className="outline_btn">
+            <button onClick={signOut} type="button" className="outline_btn">
               Sign Out
             </button>
 
@@ -110,11 +113,11 @@ const Nav = () => {
         ) : (
           <>
             {provider &&
-              Object.values(Provider).map((provider) => (
+              Object.values(provider).map((prov) => (
                 <button
                   type="button"
-                  key={provider.name}
-                  onClick={() => signIn(provider.id)}
+                  key={prov.name}
+                  onClick={() => signIn(prov.id)}
                   className="black_btn"
                 >
                   Sign In
